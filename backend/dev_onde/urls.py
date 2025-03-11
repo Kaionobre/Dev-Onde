@@ -9,4 +9,6 @@ urlpatterns = [
     path('api/', include('apps.empresa.urls')), 
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),  
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'), 
+    path('api/auth/', include('apps.autenticacao.urls')),  # Incluindo as rotas de autenticação via router
+
 ]
