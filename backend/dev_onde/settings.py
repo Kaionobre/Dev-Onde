@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework',
     'rest_framework_simplejwt',
+    'django_behave',
 ] + APPS
 
 REST_FRAMEWORK = {
