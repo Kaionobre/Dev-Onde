@@ -1,18 +1,30 @@
-import requests
+import json
 from behave import given, when, then
+from django.test import Client
+from django.contrib.auth import get_user_model
 
-BASE_URL = "http://127.0.0.1:8000/api/empresas/"  # Ajuste conforme necessário
-LOGIN_URL = "http://127.0.0.1:8000/api/auth/login/"  # Endpoint de login
+User = get_user_model()
 
 @given("que o usuário está autenticado")
 def step_impl(context):
-    credentials = {"username": "sormany", "password": "abc123"}
-    response = requests.post(LOGIN_URL, json=credentials)
-    
-    assert response.status_code == 200, f"Falha na autenticação: {response.text}"
-    
-    context.token = response.json().get("access")
-    context.headers = {"Authorization": f"Bearer {context.token}"}
+    context.client = Client()
+    context.username = "sormany"
+    context.password = "abc123"
+
+    # Cria o usuário no banco de testes se não existir
+    if not User.objects.filter(username=context.username).exists():
+        User.objects.create_user(username=context.username, password=context.password)
+
+    # Faz login
+    response = context.client.post(
+        "/api/auth/login/",
+        data=json.dumps({"username": context.username, "password": context.password}),
+        content_type="application/json"
+    )
+
+    assert response.status_code == 200, f"Erro no login: {response.content}"
+    context.token = response.json()["access"]
+    context.headers = {"HTTP_AUTHORIZATION": f"Bearer {context.token}"}  # Django usa HTTP_ prefix
 
 @given("que o usuário tem os dados de uma nova empresa")
 def step_impl(context):
@@ -24,43 +36,58 @@ def step_impl(context):
 
 @when("ele faz uma requisição POST para criar a empresa")
 def step_impl(context):
-    response = requests.post(BASE_URL, json=context.empresa_data, headers=context.headers)
-    context.response = response
-    if response.status_code == 201:
-        context.empresa_id = response.json().get("id")  # Guarda o ID para os próximos testes
+    context.response = context.client.post(
+        "/api/empresas/",
+        data=json.dumps(context.empresa_data),
+        content_type="application/json",
+        **context.headers
+    )
+    if context.response.status_code == 201:
+        context.empresa_id = context.response.json()["id"]
 
 @then("a empresa deve ser criada com sucesso")
 def step_impl(context):
-    assert context.response.status_code == 201, f"Erro: {context.response.text}"
+    assert context.response.status_code == 201, f"Erro: {context.response.content}"
 
 @given("que existe uma empresa cadastrada")
 def step_impl(context):
-    response = requests.post(BASE_URL, json={
-        "nome": "Empresa Teste Edit",
-        "setor": "Financeiro",
-        "localizacao": "Rio de Janeiro"
-    }, headers=context.headers)
-
-    assert response.status_code == 201, f"Erro ao criar empresa para o teste: {response.text}"
-    context.empresa_id = response.json().get("id")
+    empresa = {
+        "nome": "Empresa I5 Lab",
+        "setor": "Tech",
+        "localizacao": "Patos/PB"
+    }
+    response = context.client.post(
+        "/api/empresas/",
+        data=json.dumps(empresa),
+        content_type="application/json",
+        **context.headers
+    )
+    assert response.status_code == 201, f"Erro ao criar empresa: {response.content}"
+    context.empresa_id = response.json()["id"]
 
 @when("ele faz uma requisição PATCH para atualizar a empresa")
 def step_impl(context):
-    url = f"{BASE_URL}{context.empresa_id}/"
-    response = requests.patch(url, json={"nome": "Empresa Atualizada"}, headers=context.headers)
+    response = context.client.patch(
+        f"/api/empresas/{context.empresa_id}/",
+        data=json.dumps({"nome": "Empresa Atualizada"}),
+        content_type="application/json",
+        **context.headers
+    )
     context.response = response
 
 @then("a empresa deve ser atualizada com sucesso")
 def step_impl(context):
-    assert context.response.status_code == 200, f"Erro: {context.response.text}"
+    assert context.response.status_code == 200, f"Erro: {context.response.content}"
     assert context.response.json()["nome"] == "Empresa Atualizada"
 
 @when("ele faz uma requisição DELETE para excluir a empresa")
 def step_impl(context):
-    url = f"{BASE_URL}{context.empresa_id}/"
-    response = requests.delete(url, headers=context.headers)
+    response = context.client.delete(
+        f"/api/empresas/{context.empresa_id}/",
+        **context.headers
+    )
     context.response = response
 
 @then("a empresa deve ser removida com sucesso")
 def step_impl(context):
-    assert context.response.status_code == 204, f"Erro: {context.response.text}"
+    assert context.response.status_code == 204, f"Erro: {context.response.content}"
