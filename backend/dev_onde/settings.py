@@ -25,6 +25,7 @@ APPS = [
     'apps.empresa',
     'apps.vaga',
     'apps.autenticacao',
+    'drf_yasg',
 ]
 
 INSTALLED_APPS = [
