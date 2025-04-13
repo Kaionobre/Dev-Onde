@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import styles from "./LoginForm.module.css";
 
 export default function LoginForm({ tipo_usuario }: { tipo_usuario: string }) {
   const [formData, setFormData] = useState({ username: "", password: "" });
@@ -35,25 +36,49 @@ export default function LoginForm({ tipo_usuario }: { tipo_usuario: string }) {
   };
 
   return (
-    <form onSubmit={handleLogin}>
-      <h2>Login - {tipo_usuario}</h2>
-      <input
-        type="text"
-        name="username"
-        placeholder="Usuário"
-        value={formData.username}
-        onChange={handleChange}
-        required
-      />
-      <input
-        type="password"
-        name="password"
-        placeholder="Senha"
-        value={formData.password}
-        onChange={handleChange}
-        required
-      />
-      <button type="submit">Entrar</button>
-    </form>
+    <>
+      {/* Navbar */}
+      <nav className={styles.navbar}>
+        <div className={styles.navContent}>
+          <div className={styles.logo}> Dev onde?
+          </div>
+          <div className={styles.links}>
+            <a href="#">Quem somos?</a>
+            <a href="#">O que buscamos?</a>
+            <a href="#">Conecte-se</a>
+            <button className={styles.loginButton}>Cadastre-se</button>
+          </div>
+        </div>
+        <div className={styles.bottomLine}></div>
+      </nav>
+
+      {/* Página com formulário centralizado */}
+      <div className={styles.pageContainer}>
+        <form className={styles.formContainer} onSubmit={handleLogin}>
+          <h2 className={styles.formTitle}>{tipo_usuario}</h2>
+          <input
+            type="text"
+            name="username"
+            placeholder="Usuário"
+            value={formData.username}
+            onChange={handleChange}
+            required
+            className={styles.inputField}
+          />
+          <input
+            type="password"
+            name="password"
+            placeholder="Senha"
+            value={formData.password}
+            onChange={handleChange}
+            required
+            className={styles.inputField}
+          />
+          <button type="submit" className={styles.submitButton}>
+            Entrar
+          </button>
+        </form>
+      </div>
+    </>
   );
 }
