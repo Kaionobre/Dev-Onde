@@ -66,7 +66,8 @@ export default function LoginForm({ tipo_usuario }: { tipo_usuario: string }) {
 
         <div className={styles.formSection}>
           <form className={styles.formContainer} onSubmit={handleLogin}>
-            <h2 className={styles.formTitle}>{tipo_usuario}</h2>
+          <h2 className={styles.formTitle}>
+          {tipo_usuario.charAt(0).toUpperCase() + tipo_usuario.slice(1)}</h2>
             <input
               type="text"
               name="username"
