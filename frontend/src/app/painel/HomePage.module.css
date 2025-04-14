@@ -1,0 +1,257 @@
+/* HomePage.module.css */
+
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: white;
+  z-index: 1000;
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.navContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.logo {
+  font-weight: semibold;
+  font-size: 1.3rem;
+  color: #1c1c3a;
+}
+
+.logoIcon {
+  color: orange;
+  margin-left: 0.25rem;
+}
+
+.links {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.links a {
+  text-decoration: none;
+  color: #1c1c3a;
+  font-size: 0.95rem;
+  transition: color 0.2s ease;
+}
+
+.links a:hover {
+  color: #2e2e63;
+}
+
+.loginButton {
+  background-color: #2e2e63;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: semibold;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.loginButton:hover {
+  background-color: #1b1b40;
+  transform: scale(1.03);
+}
+
+.pageContainer {
+  margin-top: 90px;
+  min-height: calc(100vh - 120px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4rem 2rem;
+  flex-wrap: wrap;
+  gap: 2rem;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+}
+
+.leftContent {
+  max-width: 600px;
+  flex: 1;
+  position: relative;
+  z-index: 2;
+}
+
+.tag {
+  background-color: #ff914d;
+  color: white;
+  padding: 0.4rem 1rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+
+.description {
+  color: #4a4a68;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.enterButton {
+  background-color: #2e2e63;
+  color: white;
+  border: none;
+  padding: 0.8rem 2rem;
+  border-radius: 999px;
+  font-weight: semibold;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.enterButton:hover {
+  background-color: #1b1b40;
+  transform: scale(1.05);
+}
+
+.rightContent {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+}
+
+.imageWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* Tamanho maior */
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+}
+
+.image {
+  width: 100%;
+  height: auto;
+}
+
+
+/* Elementos decorativos animados */
+.decorativeIcon {
+  position: absolute;
+  opacity: 0.05;
+  z-index: 1;
+}
+
+.pinIcon {
+  top: 20%;
+  left: 5%;
+  font-size: 5rem;
+  color: #2e2e63;
+}
+
+.usersIcon {
+  top: 60%;
+  right: 5%;
+  font-size: 4rem;
+  color: #ff914d;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-20px) scale(1.03);
+  }
+  100% {
+    transform: translateY(0) scale(1);
+  }
+}
+
+.blobTopLeft {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 300px;
+  height: 300px;
+  max-width: 100vw;
+  max-height: 100vh;
+  background: radial-gradient(circle at 30% 30%, #36366d 0%, #47478a 100%);
+  opacity: 0.2;
+  filter: blur(100px);
+  z-index: 0;
+  pointer-events: none;
+  animation: float 8s ease-in-out infinite;
+  overflow: hidden;
+}
+
+.blobBottomRight {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 400px;
+  height: 400px;
+  max-width: 100vw;
+  max-height: 100vh;
+  background: radial-gradient(circle at 30% 30%, #f9863f 0%, #ffbd80 100%);
+  opacity: 0.2;
+  filter: blur(100px);
+  z-index: 0;
+  pointer-events: none;
+  animation: float 10s ease-in-out infinite;
+  animation-delay: 2s;
+  overflow: hidden;
+}
+
+.pageContainer {
+  overflow-x: hidden;
+}
+
+
+@media (max-width: 768px) {
+  .blobTopLeft,
+  .blobBottomRight {
+    display: none;
+  }
+}
+
+.title {
+  font-size: 3rem;
+  color: #1a1a2e;
+  margin: 1rem 0;
+  line-height: 1.4;
+  font-weight: 500; /* peso mais leve, como estava antes */
+  font-family: inherit; /* mantém a fonte padrão usada no layout */
+}
+
+.highlight {
+  color: #ff914d; /* laranja que já está em uso no projeto */
+  font-weight: 500;
+}
+
+
+
+.leftContent {
+  max-width: 700px;
+  flex: 1.2;
+  position: relative;
+  z-index: 2;
+}
+
