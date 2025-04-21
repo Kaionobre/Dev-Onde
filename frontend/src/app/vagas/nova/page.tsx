@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import styles from "./VagaForm.module.css";
 
 export default function CriarVagaForm() {
   const [formData, setFormData] = useState({
@@ -14,19 +15,12 @@ export default function CriarVagaForm() {
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
-    const { name, value } = e.target;
+    const { name, type, value, checked } = e.target;
 
-    if (e.target instanceof HTMLInputElement && e.target.type === "checkbox") {
-      setFormData((prev) => ({
-        ...prev,
-        [name]: e.target.checked,
-      }));
-    } else {
-      setFormData((prev) => ({
-        ...prev,
-        [name]: value,
-      }));
-    }
+    setFormData((prev) => ({
+      ...prev,
+      [name]: type === "checkbox" ? checked : value,
+    }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -67,96 +61,119 @@ export default function CriarVagaForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="max-w-xl mx-auto p-4 space-y-4">
-      <h2 className="text-2xl font-bold mb-2">Criar Vaga</h2>
+    <>
+      {/* NAVBAR */}
+      <nav className={styles.navbar}>
+        <div className={styles.navContent}>
+          <div className={styles.logo}>
+            Dev onde? <span className={styles.logoIcon}>⚡</span>
+          </div>
+          <div className={styles.links}>
+            <a href="#">Quem somos?</a>
+            <a href="#">O que buscamos?</a>
+            <a href="#">Conecte-se</a>
+            <button className={styles.loginButton}>Cadastrar</button>
+          </div>
+        </div>
+      </nav>
 
-      <div>
-        <label className="block font-medium">
-          *Título:
-          <input
-            type="text"
-            name="titulo"
-            value={formData.titulo}
-            onChange={handleChange}
-            required
-            className="w-full border p-2 rounded"
-          />
-        </label>
+      {/* Espaço para compensar altura da navbar fixa */}
+      <div style={{ height: "90px" }} />
+
+      {/* Blobs decorativos */}
+      <div className={styles.blobTopLeft}></div>
+      <div className={styles.blobBottomRight}></div>
+
+      {/* Página da Vaga */}
+      <div className={styles.registerPage}>
+        <div className={styles.formContainer}>
+          <h2 className={styles.formTitle}>Criar Vaga</h2>
+
+          <form onSubmit={handleSubmit} className={styles.formGroup}>
+            <div>
+              <label className={styles.labelField}>
+                Título:
+                <input
+                  className={styles.inputField}
+                  type="text"
+                  name="titulo"
+                  value={formData.titulo}
+                  onChange={handleChange}
+                  required
+                />
+              </label>
+            </div>
+
+            <div>
+              <label className={styles.labelField}>
+                Descrição:
+                <textarea
+                  className={styles.inputField}
+                  name="descricao"
+                  value={formData.descricao}
+                  onChange={handleChange}
+                  required
+                />
+              </label>
+            </div>
+
+            <div>
+              <label className={styles.labelField}>
+                Salário:
+                <input
+                  className={styles.inputField}
+                  type="number"
+                  name="salario"
+                  value={formData.salario}
+                  onChange={handleChange}
+                />
+              </label>
+            </div>
+
+            <div>
+              <label className={styles.labelField}>
+                Tipo de Contrato:
+                <input
+                  className={styles.inputField}
+                  type="text"
+                  name="tipo_contrato"
+                  value={formData.tipo_contrato}
+                  onChange={handleChange}
+                  required
+                />
+              </label>
+            </div>
+
+            <div className={styles.checkboxField}>
+              <input
+                type="checkbox"
+                name="vaga_ativa"
+                checked={formData.vaga_ativa}
+                onChange={handleChange}
+              />
+              <label htmlFor="vaga_ativa">Vaga Ativa</label>
+            </div>
+
+            <div>
+              <label className={styles.labelField}>
+                Empresa (ID):
+                <input
+                  className={styles.inputField}
+                  type="text"
+                  name="empresa"
+                  value={formData.empresa}
+                  onChange={handleChange}
+                  required
+                />
+              </label>
+            </div>
+
+            <button className={styles.submitButton} type="submit">
+              Criar Vaga
+            </button>
+          </form>
+        </div>
       </div>
-
-      <div>
-        <label className="block font-medium">
-          *Descrição:
-          <textarea
-            name="descricao"
-            value={formData.descricao}
-            onChange={handleChange}
-            required
-            className="w-full border p-2 rounded"
-          />
-        </label>
-      </div>
-
-      <div>
-        <label className="block font-medium">
-          Salário:
-          <input
-            type="number"
-            name="salario"
-            value={formData.salario}
-            onChange={handleChange}
-            className="w-full border p-2 rounded"
-          />
-        </label>
-      </div>
-
-      <div>
-        <label className="block font-medium">
-          *Tipo de Contrato:
-          <input
-            type="text"
-            name="tipo_contrato"
-            value={formData.tipo_contrato}
-            onChange={handleChange}
-            required
-            className="w-full border p-2 rounded"
-          />
-        </label>
-      </div>
-
-      <div>
-        <label className="inline-flex items-center">
-          <input
-            type="checkbox"
-            name="vaga_ativa"
-            checked={formData.vaga_ativa}
-            onChange={handleChange}
-            className="mr-2"
-          />
-          Vaga Ativa
-        </label>
-      </div>
-
-      <div>
-        <label className="block font-medium">
-          *Empresa (ID):
-          <input
-            type="text"
-            name="empresa"
-            value={formData.empresa}
-            onChange={handleChange}
-            required
-            className="w-full border p-2 rounded"
-          />
-        </label>
-      </div>
-
-      <button
-        type="submit"
-        className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
-      >
-        Criar Vaga
-      </button>
-    </form>
+    </>
   );
 }
