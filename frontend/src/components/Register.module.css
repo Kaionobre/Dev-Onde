@@ -1,0 +1,229 @@
+/* Layout principal da tela de registro */
+.registerPage {
+  display: flex;
+  flex-direction: row;
+  min-height: 100vh;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4rem 6rem;
+  gap: 6rem;
+  background: white;
+  position: relative;
+}
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: white;
+  z-index: 1000;
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.navContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.logo {
+  font-weight: semibold;
+  font-size: 1.3rem;
+  color: #1c1c3a;
+}
+
+.logoIcon {
+  color: orange;
+  margin-left: 0.25rem;
+}
+
+.links {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.links a {
+  text-decoration: none;
+  color: #1c1c3a;
+  font-size: 0.95rem;
+  transition: color 0.2s ease;
+}
+
+.links a:hover {
+  color: #2e2e63;
+}
+
+.loginButton {
+  background-color: #2e2e63;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: semibold;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.loginButton:hover {
+  background-color: #1b1b40;
+  transform: scale(1.03);
+}
+
+/* Blobs decorativos */
+.blobTopLeft {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle at 30% 30%, #36366d 0%, #47478a 100%);
+  opacity: 0.2;
+  filter: blur(100px);
+  z-index: 0;
+  pointer-events: none;
+  animation: float 8s ease-in-out infinite;
+}
+
+.blobBottomRight {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle at 30% 30%, #f9863f 0%, #ffbd80 100%);
+  opacity: 0.2;
+  filter: blur(100px);
+  z-index: 0;
+  pointer-events: none;
+  animation: float 10s ease-in-out infinite;
+  animation-delay: 2s;
+}
+
+/* Seção da imagem (se quiser adicionar futuramente) */
+.imageSection {
+  flex: 1.5;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-left: -5rem;
+  z-index: 1;
+}
+
+.illustration {
+  width: 120%;
+  max-width: none;
+  height: auto;
+  object-fit: contain;
+  transition: transform 0.4s ease;
+}
+
+.illustration:hover {
+  transform: scale(1.02);
+}
+
+/* Container do formulário */
+.formContainer {
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 2rem;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.6);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
+  animation: fadeIn 1s ease forwards;
+  backdrop-filter: blur(10px);
+  position: relative;
+  z-index: 2;
+}
+
+/* Título com destaque */
+.formTitle {
+  font-size: 2rem;
+  font-weight: 500;
+  font-family: 'Inter', sans-serif;
+  color: #1c1c3a;
+  text-align: left;
+  margin-bottom: 0.5rem;
+  position: relative;
+}
+
+.formTitle::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(to right, #2e2e63, #f9863f);
+  border-radius: 3px;
+}
+
+/* Inputs estilizados */
+.inputField {
+  padding: 0.75rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  background-color: #fff;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.inputField:focus {
+  border-color: #2e2e63;
+  box-shadow: 0 0 0 2px rgba(46, 46, 99, 0.2);
+  outline: none;
+}
+
+/* Botão registrar */
+.submitButton {
+  background: linear-gradient(90deg, #2e2e63 0%, #423b93 100%);
+  color: white;
+  border: none;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 1rem;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.submitButton:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 6px 20px rgba(46, 46, 99, 0.3);
+}
+
+/* Animação */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .registerPage {
+    flex-direction: column;
+    padding: 2rem;
+    gap: 2rem;
+  }
+
+  .blobTopLeft,
+  .blobBottomRight {
+    display: none;
+  }
+
+  .formContainer {
+    width: 100%;
+    padding: 1.5rem;
+  }
+}
