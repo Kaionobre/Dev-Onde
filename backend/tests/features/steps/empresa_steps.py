@@ -24,7 +24,7 @@ def step_impl(context):
 
     assert response.status_code == 200, f"Erro no login: {response.content}"
     context.token = response.json()["access"]
-    context.headers = {"HTTP_AUTHORIZATION": f"Bearer {context.token}"}  # Django usa HTTP_ prefix
+    context.headers = {"HTTP_AUTHORIZATION": f"Bearer {context.token}"} 
 
 @given("que o usuário tem os dados de uma nova empresa")
 def step_impl(context):
