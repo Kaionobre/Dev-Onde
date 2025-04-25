@@ -18,7 +18,7 @@ export default function EmpresasPage() {
       .then(setEmpresas)
       .catch(() => {
         alert("Erro ao buscar empresas");
-        router.push("/login");
+        router.push("auth/login");
       });
   }, []);
 

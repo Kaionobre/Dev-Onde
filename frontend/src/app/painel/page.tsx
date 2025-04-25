@@ -3,25 +3,13 @@ import styles from "./HomePage.module.css";
 import Image from "next/image";
 import { MapPin, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
+import Navbar from "@/components/navbar_sair/Navbar"
+import ProtectedRoute from "@/components/guardiao_rota/ProtectedRoute"
 
 export default function HomePage() {
   return (
-    <>
-      {/* Navbar fixa no topo */}
-      <nav className={styles.navbar}>
-        <div className={styles.navContent}>
-          <div className={styles.logo}>
-            Dev onde? <span className={styles.logoIcon}>⚡</span>
-          </div>
-          <div className={styles.links}>
-            <a href="#">Quem somos?</a>
-            <a href="#">O que buscamos?</a>
-            <a href="#">Conecte-se</a>
-            <button className={styles.loginButton}>Cadastrar</button>
-          </div>
-        </div>
-      </nav>
-
+    <ProtectedRoute>
+      <Navbar />
       <div style={{ height: "90px" }} />
 
       {/* BLOB decorativo */}
@@ -62,6 +50,6 @@ export default function HomePage() {
           </div>
         </div>
       </motion.div>
-    </>
-  );
+    </ProtectedRoute>
+  )
 }

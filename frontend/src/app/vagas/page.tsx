@@ -2,66 +2,129 @@
 import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import styles from "./Vagas.module.css"
+import { Building2, Briefcase, BadgeDollarSign } from 'lucide-react'
+import Navbar from "@/components/navbar_sair/Navbar"
+import ProtectedRoute from "@/components/guardiao_rota/ProtectedRoute"
 
-// Defina uma interface para o tipo Vaga
 interface Vaga {
   id: number;
   titulo: string;
+  descricao: string;
+  salario: string;
   tipo_contrato: string;
-  salario: number | null;
-  // Adicione outros campos que você precisa
+  vaga_ativa: boolean;
+  empresa: number;
+  recrutador: number;
 }
 
 export default function ListaVagas() {
-  // Use a interface Vaga no estado inicial
   const [vagas, setVagas] = useState<Vaga[]>([])
+  const [loading, setLoading] = useState(true)
   const router = useRouter()
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/api/vagas/")
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error(`Erro na requisição: ${res.status}`);
+    const fetchVagas = async () => {
+      try {
+        setLoading(true)
+        const token = localStorage.getItem('access_token')
+        
+        if (!token) {
+          router.push('/auth/login')
+          return
         }
-        return res.json();
-      })
-      .then((data) => {
-        console.log("Dados recebidos:", data);
-        // Verifica a estrutura da resposta
-        if (Array.isArray(data)) {
-          setVagas(data);
-        } else if (data && typeof data === 'object' && data.results) {
-          setVagas(data.results);
-        } else {
-          setVagas([]);
+
+        const response = await fetch("http://127.0.0.1:8000/api/vagas/", {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          }
+        })
+
+        if (!response.ok) {
+          if (response.status === 401) {
+            router.push('/auth/login')
+            return
+          }
+          throw new Error(`Erro na requisição: ${response.status}`)
         }
-      })
-      .catch((err) => {
-        console.error("Erro ao carregar vagas:", err);
-      });
-  }, []);
+
+        const data = await response.json()
+        setVagas(Array.isArray(data) ? data : data.results || [])
+      } catch (err) {
+        console.error("Erro ao carregar vagas:", err)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchVagas()
+  }, [router])
+
+  if (loading) {
+    return (
+      <ProtectedRoute>
+        <Navbar />
+        <div className={styles.loadingContainer}>
+          <div className={styles.loader}></div>
+          <p>Carregando vagas...</p>
+        </div>
+      </ProtectedRoute>
+    )
+  }
 
   return (
-    <div className={styles.container}>
-      <h1 className={styles.title}>Vagas disponíveis</h1>
-      <div className={styles.vagaList}>
-        {vagas.length > 0 ? (
-          vagas.map((vaga, index) => (
-            <div
-              key={vaga.id || `vaga-${index}`}
-              className={styles.card}
-              onClick={() => router.push(`/vagas/${vaga.id}`)}
-            >
-              <h2>{vaga.titulo || "Título não disponível"}</h2>
-              <p>Tipo de contrato: <strong>{vaga.tipo_contrato || "Não especificado"}</strong></p>
-              <p>Salário: <strong>{vaga.salario ? `R$ ${vaga.salario}` : "A combinar"}</strong></p>
-              <span className={styles.link}>Ver detalhes →</span>
+    <ProtectedRoute>
+      <Navbar />
+      <div className={styles.container}>
+        <h1 className={styles.title}>Vagas Disponíveis</h1>
+        <div className={styles.vagaList}>
+          {vagas.length > 0 ? (
+            vagas.map((vaga) => (
+              <div
+                key={vaga.id}
+                className={styles.card}
+                onClick={() => router.push(`/vagas/${vaga.id}`)}
+              >
+                <div className={styles.cardHeader}>
+                  <h2 className={styles.cardTitle}>{vaga.titulo}</h2>
+                  {vaga.vaga_ativa && (
+                    <span className={styles.statusBadge}>Ativa</span>
+                  )}
+                </div>
+
+                <p className={styles.description}>{vaga.descricao}</p>
+
+                <div className={styles.infoGrid}>
+                  <div className={styles.infoItem}>
+                    <Building2 size={18} />
+                    <span>Empresa #{vaga.empresa}</span>
+                  </div>
+                  <div className={styles.infoItem}>
+                    <Briefcase size={18} />
+                    <span>{vaga.tipo_contrato}</span>
+                  </div>
+                  <div className={styles.infoItem}>
+                    <BadgeDollarSign size={18} />
+                    <span>R$ {parseFloat(vaga.salario).toLocaleString('pt-BR', {
+                      minimumFractionDigits: 2,
+                      maximumFractionDigits: 2
+                    })}</span>
+                  </div>
+                </div>
+
+                <button className={styles.detailsButton}>
+                  Ver detalhes →
+                </button>
+              </div>
+            ))
+          ) : (
+            <div className={styles.emptyState}>
+              <h3>Nenhuma vaga disponível no momento</h3>
+              <p>Volte mais tarde para novas oportunidades!</p>
             </div>
-          ))
-        ) : (
-          <p>Nenhuma vaga disponível no momento.</p>
-        )}
+          )}
+        </div>
       </div>
-    </div>
+    </ProtectedRoute>
   )
 }
