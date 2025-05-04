@@ -11,12 +11,8 @@ export default function HomePage() {
     <ProtectedRoute>
       <Navbar />
       <div style={{ height: "90px" }} />
-
-      {/* BLOB decorativo */}
       <div className={styles.blobTopLeft} />
       <div className={styles.blobBottomRight} />
-
-      {/* Conteúdo com animação */}
       <motion.div
         className={styles.pageContainer}
         initial={{ opacity: 0, y: 30 }}

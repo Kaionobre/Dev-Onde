@@ -25,9 +25,16 @@
 }
 
 .logoIcon {
-  color: orange;
-  margin-left: 0.25rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 4px;
+  position: relative;
+  top: 1px; /* ajuste fino opcional */
+  color: #FFA500;
 }
+
+
 
 .links {
   display: flex;
@@ -254,4 +261,3 @@
   position: relative;
   z-index: 2;
 }
-

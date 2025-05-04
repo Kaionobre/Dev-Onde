@@ -16,7 +16,7 @@ class CustomUserSerializer(serializers.ModelSerializer):
         return value
 
     def create(self, validated_data):
-        
+
         if CustomUser.objects.filter(username=validated_data['username']).exists():
             raise serializers.ValidationError({'username': 'Esse username já está em uso.'})
         if CustomUser.objects.filter(email=validated_data['email']).exists():

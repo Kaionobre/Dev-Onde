@@ -1,54 +1,438 @@
-.container {
+/* ---------- Página Principal Container ---------- */
+.page {
+  padding-top: 10rem; /* Espaço apenas para o navbar */
+  margin: 0;
   min-height: 100vh;
-  background-color: #1e1b4b;
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem;
+  width: 100%;
+  font-family: sans-serif;
+  background-color: #fafafa;
+  color: #333;
+  overflow-x: hidden;
+  position: relative;
+  box-sizing: border-box;
 }
 
+/* ---------- Reset para elementos dentro da página ---------- */
+.page * {
+  box-sizing: border-box;
+}
+
+/* ---------- Navbar ---------- */
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: white;
+  z-index: 1000;
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.navContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.logo {
+  font-weight: semibold;
+  font-size: 1.3rem;
+  color: #1c1c3a;
+}
+
+.logoIcon {
+  color: orange;
+  margin-left: 0.25rem;
+}
+
+.links {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.links a {
+  text-decoration: none;
+  color: #1c1c3a;
+  font-size: 0.95rem;
+  transition: color 0.2s ease;
+}
+
+.links a:hover {
+  color: #2e2e63;
+}
+
+.loginButton {
+  background-color: #2e2e63;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: semibold;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.loginButton:hover {
+  background-color: #1b1b40;
+  transform: scale(1.03);
+}
+/* ---------- Seção de Introdução Melhorada ---------- */
 .section {
   text-align: center;
-  max-width: 1200px;
+  padding: 3rem 1rem;
+  background: linear-gradient(135deg, rgba(93, 63, 211, 0.08) 0%, rgba(255, 123, 0, 0.05) 100%);
+  border-radius: 0 0 30px 30px;
+  margin-bottom: 20px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .title {
-  font-size: 1.5rem;
-  font-weight: bold;
-  margin-bottom: 1rem;
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  color: #1c1c3a;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.4;
 }
 
 .subtitle {
-  font-size: 0.875rem;
-  color: #cbd5e1;
+  color: #666;
   margin-bottom: 2rem;
+  font-size: 1.1rem;
 }
 
-.cards {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 2rem;
-  justify-content: center;
-}
+/* ---------- Cards Melhorados ---------- */
+/* ---------- Cards Melhorados ---------- */
+.cardsSection {
+    padding: 2rem 2rem 4rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.8rem;
+    margin-top: 1rem;
+  }
+  
+  .card {
+    background-color: white;
+    padding: 2rem 1.5rem;
+    border-radius: 16px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+    text-align: center;
+    transition: all 0.3s ease;
+    border: 1px solid #f0f0f0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(93, 63, 211, 0.15);
+    border-color: rgba(93, 63, 211, 0.1);
+  }
+  
+  .card img {
+    width: 70px;
+    height: 70px;
+    margin-bottom: 1.5rem;
+    transition: transform 0.3s ease;
+  }
+  
+  .card:hover img {
+    transform: scale(1.1);
+  }
+  
+  .card p {
+    color: #444;
+    font-size: 1.05rem;
+    margin-top: 0.5rem;
+    font-weight: 500;
+  }
 
-.card {
-  background-color: #312e81;
-  border-radius: 1rem;
-  padding: 1.5rem;
-  width: 200px;
+/* ---------- Newsletter Melhorada ---------- */
+.newsletterSection {
+  margin: 0 auto 4rem;
+  background: linear-gradient(135deg, #3c2a78 0%, #4f35a3 100%);
+  padding: 3.5rem 2.5rem;
+  border-radius: 20px;
   text-align: center;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-  transition: transform 0.3s ease;
+  box-shadow: 0 15px 30px rgba(76, 55, 154, 0.2);
+  max-width: 1000px;
+  color: white;
+  width: 92%;
+  box-sizing: border-box;
 }
 
-.card:hover {
-  transform: scale(1.05);
-  background-color: #4338ca;
-}
-
-.card img {
-  width: 64px;
-  height: 64px;
+.newsletterTitle {
+  font-size: 2rem;
   margin-bottom: 1rem;
+  color: white;
+}
+
+.newsletterText {
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 2rem;
+  font-size: 1.1rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.newsletterForm {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.newsletterInput {
+  padding: 0.9rem 1.2rem;
+  border: none;
+  border-radius: 10px;
+  width: 320px;
+  max-width: 100%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+.newsletterInput:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(255, 123, 0, 0.3);
+}
+
+.newsletterButton {
+  background-color: #ff7b00; /* Laranja */
+  color: white;
+  padding: 0.9rem 1.8rem;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  font-size: 1rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.newsletterButton:hover {
+  background-color: #e66f00;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(230, 111, 0, 0.3);
+}
+
+/* ---------- Depoimentos Melhorados ---------- */
+.testimonialsSection {
+  padding: 4rem 2rem;
+  text-align: center;
+  background: #fff;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.sectionTitle {
+  font-size: 2rem;
+  margin-bottom: 3rem;
+  color: #1c1c3a;
+  position: relative;
+  display: inline-block;
+}
+
+.sectionTitleDecoration {
+  position: absolute;
+  width: 60px;
+  height: 4px;
+  background: linear-gradient(90deg, #5d3fd3, #ff7b00);
+  bottom: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 2px;
+}
+
+.testimonialCards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.testimonialCard {
+  background-color: white;
+  padding: 2.5rem 2rem;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+  text-align: left;
+  transition: all 0.3s ease;
+  border: 1px solid #f0f0f0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  margin: 0;
+}
+
+.testimonialCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(93, 63, 211, 0.1);
+}
+
+.testimonialHeader {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.testimonialAvatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 999px;
+  margin-right: 1rem;
+  border: 3px solid #f2f2f2;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+.testimonialUserHeading {
+  margin: 0;
+}
+
+.testimonialName {
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: #1c1c3a;
+  margin-bottom: 0.2rem;
+}
+
+.testimonialRole {
+  font-size: 0.9rem;
+  color: #5d3fd3;
+  font-weight: 500;
+}
+
+.testimonialText {
+  color: #444;
+  margin-top: 0.5rem;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  position: relative;
+}
+
+.testimonialQuote {
+  font-size: 4rem;
+  color: rgba(93, 63, 211, 0.1);
+  position: absolute;
+  top: -20px;
+  left: -15px;
+  line-height: 1;
+}
+
+/* ---------- Seção de Informações Extras ---------- */
+.infoSection {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* ---------- Footer Adicionado ---------- */
+.footer {
+  background-color: #1c1c3a;
+  color: white;
+  padding: 3rem 2rem;
+  margin-top: 2rem;
+}
+
+.footerContent {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  text-align: center;
+}
+
+.footerLogo {
+  font-weight: semibold;
+  font-size: 1.3rem;
+  color: white;
+}
+
+.footerText {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.9rem;
+  margin: 0.5rem 0;
+}
+
+.footerLinks {
+  display: flex;
+  gap: 2rem;
+  margin-top: 1rem;
+}
+
+.footerLinks a {
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: color 0.2s ease;
+}
+
+.footerLinks a:hover {
+  color: #ff7b00;
+}
+
+/* ---------- Responsividade ---------- */
+@media (max-width: 768px) {
+  .cardsSection {
+    padding: 1rem;
+  }
+  
+  .newsletterSection {
+    padding: 2.5rem 1.5rem;
+    margin: 0 1rem 3rem;
+    width: calc(100% - 2rem);
+  }
+  
+  .testimonialCards {
+    grid-template-columns: 1fr;
+  }
+  
+  .title {
+    font-size: 1.5rem;
+  }
+  
+  .card {
+    padding: 1.2rem 0.8rem;
+    max-width: 180px;
+  }
+  
+  .cards {
+    justify-content: center;
+    gap: 1rem;
+  }
+  
+  .footerLinks {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+  }
 }
