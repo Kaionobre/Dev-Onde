@@ -1,0 +1,172 @@
+/* NovaEmpresaPage.module.css */
+
+.loginPage {
+  display: flex;
+  flex-direction: row;
+  min-height: 100vh;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4rem 6rem;
+  gap: 6rem;
+  background: white;
+  position: relative;
+}
+
+/* Blobs decorativos */
+.blobTopLeft {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle at 30% 30%, #36366d 0%, #47478a 100%);
+  opacity: 0.2;
+  filter: blur(100px);
+  z-index: 0;
+  pointer-events: none;
+  animation: float 8s ease-in-out infinite;
+}
+
+.blobBottomRight {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle at 30% 30%, #f9863f 0%, #ffbd80 100%);
+  opacity: 0.2;
+  filter: blur(100px);
+  z-index: 0;
+  pointer-events: none;
+  animation: float 10s ease-in-out infinite;
+  animation-delay: 2s;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+/* Seção da imagem */
+.imageSection {
+  flex: 1.5;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-left: -5rem;
+  z-index: 1;
+}
+
+.illustration {
+  width: 120%;
+  height: auto;
+  object-fit: contain;
+  transition: transform 0.4s ease;
+}
+
+.illustration:hover {
+  transform: scale(1.02);
+}
+
+/* Container do formulário */
+.formContainer {
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem; /* Espaço entre os inputs e o botão */
+  padding: 2rem;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.6);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
+  animation: fadeIn 1s ease forwards;
+  backdrop-filter: blur(10px);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.formTitle {
+  font-size: 2rem;
+  font-weight: 400;
+  font-family: 'Inter', sans-serif;
+  color: #1c1c3a;
+  text-align: left;
+  position: relative;
+}
+
+.formTitle::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(to right, #2e2e63, #f9863f);
+  border-radius: 3px;
+}
+
+/* Inputs */
+.inputField {
+  padding: 0.75rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  background-color: #fff;
+  width: 100%; /* Garante largura total */
+}
+
+.submitButton {
+  background-color: #2e2e63;
+  color: white;
+  border: none;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 1rem;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  width: 100%; /* Ocupa toda a largura disponível */
+  margin-top: 0.5rem; /* Pequeno espaço acima do botão */
+}
+
+.submitButton:hover {
+  background-color: #1b1b40;
+  transform: scale(1.03);
+}
+.submitButton:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 6px 20px rgba(46, 46, 99, 0.3);
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .loginPage {
+    flex-direction: column;
+    padding: 2rem;
+    gap: 2rem;
+  }
+
+  .imageSection {
+    justify-content: center;
+    margin-left: 0;
+  }
+
+  .blobTopLeft,
+  .blobBottomRight {
+    display: none;
+  }
+}

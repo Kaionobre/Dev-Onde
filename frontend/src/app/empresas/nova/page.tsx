@@ -1,37 +1,95 @@
 "use client";
-import { getEmpresas } from "@/service/api";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { criarEmpresa } from "@/service/api";
+import Navbar from "@/components/navbar_sair/Navbar";
+import ProtectedRoute from "@/components/guardiao_rota/ProtectedRoute";
+import styles from "./empresas.module.css"; // importando o CSS module
+import Image from "next/image";
 
-export default function EmpresasPage() {
-  const [empresas, setEmpresas] = useState([]);
+
+export default function NovaEmpresaPage() {
   const router = useRouter();
+  const [form, setForm] = useState({
+    nome: "",
+    setor: "",
+    site: "",
+    localizacao: "",
+  });
 
-  useEffect(() => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
     const token = localStorage.getItem("token");
-    if (!token) {
-      router.push("/login");
-      return;
+    try {
+      await criarEmpresa(form, token);
+      router.push("/home");
+    } catch (error) {
+      alert("Erro ao criar empresa");
     }
-
-    getEmpresas(token)
-      .then(setEmpresas)
-      .catch(() => {
-        alert("Erro ao buscar empresas");
-        router.push("auth/login");
-      });
-  }, []);
+  };
 
   return (
-    <div className="p-4">
-      <h1 className="text-xl font-bold mb-4">Empresas</h1>
-      {empresas.map((empresa: any) => (
-        <div key={empresa.id} className="border p-2 my-2 rounded">
-          <p><strong>Nome:</strong> {empresa.nome}</p>
-          <p><strong>Setor:</strong> {empresa.setor}</p>
-          <p><strong>Localização:</strong> {empresa.localizacao}</p>
+    <ProtectedRoute>
+      <Navbar />
+      <div className={styles.loginPage}>
+        {/* Blobs decorativos */}
+        <div className={styles.blobTopLeft} />
+        <div className={styles.blobBottomRight} />
+
+        {/* Seção da imagem */}
+        <div className={styles.imageSection}>
+          <img
+            src="/imagens/computer-illustration.png"
+            alt="Ilustração de computador"
+            className={styles.illustration}
+          />
         </div>
-      ))}
-    </div>
+
+        {/* Formulário */}
+        <div className={styles.formContainer}>
+          <h1 className={styles.formTitle}>Cadastrar Empresa</h1>
+          <form onSubmit={handleSubmit}>
+            <input
+              className={styles.inputField}
+              name="nome"
+              placeholder="Nome"
+              value={form.nome}
+              onChange={handleChange}
+            />
+            <input
+              className={styles.inputField}
+              name="setor"
+              placeholder="Setor"
+              value={form.setor}
+              onChange={handleChange}
+            />
+            <input
+              className={styles.inputField}
+              name="site"
+              placeholder="Site"
+              value={form.site}
+              onChange={handleChange}
+            />
+            <input
+              className={styles.inputField}
+              name="localizacao"
+              placeholder="Localização"
+              value={form.localizacao}
+              onChange={handleChange}
+            />
+            <button
+              className={styles.submitButton}
+              type="submit"
+            >
+              Cadastrar
+            </button>
+          </form>
+        </div>
+      </div>
+    </ProtectedRoute>
   );
 }

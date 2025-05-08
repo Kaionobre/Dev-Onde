@@ -24,7 +24,7 @@ export default function Navbar() {
         <div className={styles.links}>
           <a href="#">Quem somos?</a>
           <a href="#">O que buscamos?</a>
-          <a href="#">Conecte-se</a>
+          <a href="#">Comunidade</a>
 
           <button onClick={handleSairClick} className={styles.loginButton}>
             Sair

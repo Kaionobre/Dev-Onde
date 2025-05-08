@@ -1,7 +1,6 @@
 .navbar {
   position: fixed;
   top: 0;
-  left: 0;
   width: 100%;
   background-color: white;
   z-index: 1000;
@@ -10,19 +9,19 @@
 }
 
 .navContent {
-  max-width: 1200px;
-  margin: 0 auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .logo {
-  font-weight: 600;
+  font-weight: semibold;
   font-size: 1.3rem;
   color: #1c1c3a;
 }
+
 
 .icon {
   color: #f9863f;

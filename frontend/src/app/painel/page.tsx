@@ -1,10 +1,11 @@
 'use client';
 import styles from "./HomePage.module.css";
 import Image from "next/image";
+import Link from "next/link";
 import { MapPin, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
-import Navbar from "@/components/navbar_sair/Navbar"
-import ProtectedRoute from "@/components/guardiao_rota/ProtectedRoute"
+import Navbar from "@/components/navbar_sair/Navbar";
+import ProtectedRoute from "@/components/guardiao_rota/ProtectedRoute";
 
 export default function HomePage() {
   return (
@@ -20,17 +21,22 @@ export default function HomePage() {
         transition={{ duration: 0.6, ease: "easeOut" }}
       >
         <div className={styles.leftContent}>
-          <span className={styles.tag}><MapPin size={14} /> Patos e região</span>
+          <span className={styles.tag}>
+            <MapPin size={14} /> Patos e região
+          </span>
+
           <h1 className={styles.title}>
-            Encontre <span className={styles.highlight}>desenvolvedores</span><br />próximos de você
+            Encontre <span className={styles.highlight}>desenvolvedores</span><br />
+            próximos de você
           </h1>
 
           <p className={styles.description}>
             Aproxime-se da oportunidade. Conecte-se com devs da sua cidade e crie sua rede hoje mesmo.
           </p>
-          <button className={styles.enterButton}>
+
+          <Link href="http://localhost:3000/auth/login" className={styles.enterButton}>
             Entrar <ArrowRight size={18} style={{ marginLeft: 8 }} />
-          </button>
+          </Link>
         </div>
 
         <div className={styles.rightContent}>
@@ -47,5 +53,5 @@ export default function HomePage() {
         </div>
       </motion.div>
     </ProtectedRoute>
-  )
+  );
 }

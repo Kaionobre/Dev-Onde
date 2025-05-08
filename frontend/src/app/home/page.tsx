@@ -22,11 +22,13 @@ export default function HomePage() {
         <section className={styles.cardsSection}>
           <div className={styles.cards}>
             <div className={styles.card}>
-              <img src="/imagens/discord.png" alt="Comunidade" />
+              <a href="https://discord.gg/yWNcXeEx5D" target="_blank" rel="noopener noreferrer">
+              <img src="/imagens/discord.png" alt="Comunidade" /></a>
               <p>Clique aqui e acesse a comunidade</p>
-            </div>
+              </div>
             <div className={styles.card}>
-              <img src="/imagens/whatsapp.png" alt="WhatsApp" />
+              <a href="https://chat.whatsapp.com/JffhoZN32vdHQnbzt2em2T" target="_blank" rel="noopener noreferrer">
+              <img src="/imagens/whatsapp.png" alt="WhatsApp" /></a>
               <p>Junte-se a nós no WhatsApp</p>
             </div>
             <div className={styles.card}>
@@ -34,7 +36,8 @@ export default function HomePage() {
               <p>Preencha o forms para concorrer a vagas</p>
             </div>
             <div className={styles.card}>
-              <img src="/imagens/vaga.png" alt="Emprego e inovação" />
+              <a href="http://localhost:3000/vagas/">
+              <img src="/imagens/vaga.png" alt="Emprego e inovação" /></a>
               <p>Encontre oportunidades de emprego e inovação</p>
             </div>
           </div>
