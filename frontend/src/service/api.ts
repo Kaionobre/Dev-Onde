@@ -45,24 +45,36 @@ export const getEmpresas = async (token: string) => {
   return response.json();
 };
 
+// Interface para os dados da empresa
+interface EmpresaData {
+  nome: string;
+  cnpj: string;
+  email?: string;
+  telefone?: string;
+  site?: string;
+  setor: string;
+  localizacao: string;
+}
+
 // Função para criar uma nova empresa
-export const criarEmpresa = async (data: { nome: string, descricao: string }, token: string) => {
-  try {
-    const response = await fetch(`${BASE_URL}/empresas/`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify(data),
-    });
-
-    if (!response.ok) {
-      throw new Error("Erro ao criar empresa");
-    }
-
-    return response.json(); // Retorna os dados da empresa criada
-  } catch (error) {
-    console.error("Erro ao criar empresa:", error);
+export const criarEmpresa = async (data: EmpresaData, token: string | null) => {
+  if (!token) {
+    throw new Error("Token de autenticação não fornecido");
   }
+
+  const response = await fetch(`${BASE_URL}/empresas/`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(data),
+  });
+
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => ({}));
+    throw new Error(`Erro ao criar empresa: ${errorData.message || response.statusText}`);
+  }
+
+  return response.json(); // Retorna os dados da empresa criada
 };

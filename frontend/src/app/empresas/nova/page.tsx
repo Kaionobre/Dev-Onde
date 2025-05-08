@@ -4,16 +4,17 @@ import { useRouter } from "next/navigation";
 import { criarEmpresa } from "@/service/api";
 import Navbar from "@/components/navbar_sair/Navbar";
 import ProtectedRoute from "@/components/guardiao_rota/ProtectedRoute";
-import styles from "./empresas.module.css"; // importando o CSS module
-import Image from "next/image";
-
+import styles from "./empresas.module.css";
 
 export default function NovaEmpresaPage() {
   const router = useRouter();
   const [form, setForm] = useState({
     nome: "",
-    setor: "",
+    cnpj: "",
+    email: "",
+    telefone: "",
     site: "",
+    setor: "",
     localizacao: "",
   });
 
@@ -23,7 +24,7 @@ export default function NovaEmpresaPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("access_token");
     try {
       await criarEmpresa(form, token);
       router.push("/home");
@@ -36,11 +37,9 @@ export default function NovaEmpresaPage() {
     <ProtectedRoute>
       <Navbar />
       <div className={styles.loginPage}>
-        {/* Blobs decorativos */}
         <div className={styles.blobTopLeft} />
         <div className={styles.blobBottomRight} />
 
-        {/* Seção da imagem */}
         <div className={styles.imageSection}>
           <img
             src="/imagens/computer-illustration.png"
@@ -49,22 +48,37 @@ export default function NovaEmpresaPage() {
           />
         </div>
 
-        {/* Formulário */}
         <div className={styles.formContainer}>
           <h1 className={styles.formTitle}>Cadastrar Empresa</h1>
           <form onSubmit={handleSubmit}>
             <input
               className={styles.inputField}
               name="nome"
-              placeholder="Nome"
+              placeholder="Nome *"
               value={form.nome}
+              onChange={handleChange}
+              required
+            />
+            <input
+              className={styles.inputField}
+              name="cnpj"
+              placeholder="CNPJ *"
+              value={form.cnpj}
+              onChange={handleChange}
+              required
+            />
+            <input
+              className={styles.inputField}
+              name="email"
+              placeholder="Email"
+              value={form.email}
               onChange={handleChange}
             />
             <input
               className={styles.inputField}
-              name="setor"
-              placeholder="Setor"
-              value={form.setor}
+              name="telefone"
+              placeholder="Telefone"
+              value={form.telefone}
               onChange={handleChange}
             />
             <input
@@ -76,10 +90,19 @@ export default function NovaEmpresaPage() {
             />
             <input
               className={styles.inputField}
+              name="setor"
+              placeholder="Setor *"
+              value={form.setor}
+              onChange={handleChange}
+              required
+            />
+            <input
+              className={styles.inputField}
               name="localizacao"
-              placeholder="Localização"
+              placeholder="Localização *"
               value={form.localizacao}
               onChange={handleChange}
+              required
             />
             <button
               className={styles.submitButton}
