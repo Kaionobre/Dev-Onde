@@ -1,12 +1,20 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.options import Options
 import time
 import unittest
 
 class TestLogDividido(unittest.TestCase):
 
     def setUp(self):
-        self.browser = webdriver.Chrome()
+        chrome_options = Options()
+        chrome_options.add_argument("--headless")  # modo invisível
+        chrome_options.add_argument("--disable-gpu")
+        chrome_options.add_argument("--window-size=1920,1080")
+        chrome_options.add_argument("--no-sandbox")
+        chrome_options.add_argument("--disable-dev-shm-usage")
+
+        self.browser = webdriver.Chrome(options=chrome_options)
         self.browser.get('http://localhost:3000//auth//login//')
 
     def tearDown(self):
@@ -14,15 +22,15 @@ class TestLogDividido(unittest.TestCase):
     
     def test_login(self):
         username = self.browser.find_element(By.CSS_SELECTOR, 'body > div.LoginForm_loginPage__S7PQy > form > input:nth-child(2)')
-        username.send_keys('angelica')
-        time.sleep(2)
-        self.assertEqual(username.get_attribute('value'), 'angelica')
+        username.send_keys('kaio')
 
         senha = self.browser.find_element(By.CSS_SELECTOR, 'body > div.LoginForm_loginPage__S7PQy > form > input:nth-child(3)')
-        senha.send_keys('angelica123')
-        time.sleep(2)
-        self.assertEqual(senha.get_attribute('value'), 'angelica123')
+        senha.send_keys('123')
 
+        button_login = self.browser.find_element(By.CLASS_NAME, 'LoginForm_submitButton__CeSet')
+        button_login.click()
 
+        time.sleep(4)
+
+        self.assertIn('/home', self.browser.current_url)
     
-        #button_login = browser.find_element(By.CSS_SELECTOR, 'body > div.LoginForm_loginPage__S7PQy > form > button').click()
