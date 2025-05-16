@@ -10,6 +10,7 @@
   gap: 6rem;
   background: white;
   position: relative;
+  padding-top: 150px;
 }
 
 /* Blobs decorativos */
@@ -78,14 +79,15 @@
   max-width: 500px;
   display: flex;
   flex-direction: column;
-  gap: 2rem; /* Espaço entre os inputs e o botão */
-  padding: 2rem;
+  gap: 1.2rem; /* diminuído de 2rem */
+  padding: 1.5rem; /* diminuído de 2rem */
   border-radius: 16px;
   background: rgba(255, 255, 255, 0.6);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
   animation: fadeIn 1s ease forwards;
   backdrop-filter: blur(10px);
 }
+
 
 @keyframes fadeIn {
   from {
@@ -120,11 +122,11 @@
 
 /* Inputs */
 .inputField {
-  padding: 0.75rem 1rem;
+  padding: 0.6rem 0.9rem;;
   border: 1px solid #ccc;
   border-radius: 8px;
   font-size: 1rem;
-  margin-bottom: 1rem;
+  margin-bottom: 0.8rem;;
   background-color: #fff;
   width: 100%; /* Garante largura total */
 }

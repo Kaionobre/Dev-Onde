@@ -1,4 +1,5 @@
-"use client"
+'use client'
+
 import { useState, useEffect } from "react"
 import styles from "./Register.module.css"
 import { useRouter } from "next/navigation"
@@ -14,7 +15,6 @@ export default function RegisterPage() {
     tipo_usuario: "",
   })
 
-  // Controla o tempo de exibição do alerta
   useEffect(() => {
     if (alert.show) {
       const timer = setTimeout(() => {
@@ -24,9 +24,7 @@ export default function RegisterPage() {
     }
   }, [alert.show])
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target
     setFormData((prev) => ({ ...prev, [name]: value }))
   }
@@ -50,7 +48,7 @@ export default function RegisterPage() {
             </svg>
           )}
         </div>
-        <span className="block sm:inline">{message}</span>
+        <span>{message}</span>
       </div>
     )
   }
@@ -69,29 +67,14 @@ export default function RegisterPage() {
       const data = await response.json()
 
       if (response.ok) {
-        setAlert({
-          show: true,
-          message: 'Registro realizado com sucesso!',
-          type: 'success'
-        })
-        setTimeout(() => {
-          router.push('/auth/login')
-        }, 3000)
+        setAlert({ show: true, message: 'Registro realizado com sucesso!', type: 'success' })
+        setTimeout(() => router.push('/auth/login'), 3000)
       } else {
-        setAlert({
-          show: true,
-          message: data.message || 'Erro ao registrar.',
-          type: 'danger'
-        })
-        console.error(data)
+        setAlert({ show: true, message: data.message || 'Erro ao registrar.', type: 'danger' })
       }
     } catch (error) {
       console.error("Erro inesperado:", error)
-      setAlert({
-        show: true,
-        message: 'Erro inesperado. Tente novamente mais tarde.',
-        type: 'danger'
-      })
+      setAlert({ show: true, message: 'Erro inesperado. Tente novamente mais tarde.', type: 'danger' })
     }
   }
 
@@ -102,7 +85,8 @@ export default function RegisterPage() {
       <div className={styles.blobTopLeft} />
       <div className={styles.blobBottomRight} />
       <div className={styles.overflowGradientLeft} />
-      <div className={styles.registerPage}>
+      
+      <div className={styles.loginPage}>
         <div className={styles.imageSection}>
           <img
             src="/imagens/computer-illustration.png"
@@ -110,6 +94,7 @@ export default function RegisterPage() {
             className={styles.illustration}
           />
         </div>
+
         <form onSubmit={handleSubmit} className={styles.formContainer}>
           <h2 className={styles.formTitle}>Criar conta</h2>
 

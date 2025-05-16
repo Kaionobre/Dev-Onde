@@ -38,6 +38,7 @@
   width: 100%;
   max-width: 500px;
   display: flex;
+  flex-wrap: wrap;
   flex-direction: column;
   gap: 1.5rem;
   padding: 2rem;

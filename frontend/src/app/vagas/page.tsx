@@ -105,10 +105,12 @@ export default function ListaVagas() {
                   </div>
                   <div className={styles.infoItem}>
                     <BadgeDollarSign size={18} />
-                    <span>R$ {parseFloat(vaga.salario).toLocaleString('pt-BR', {
-                      minimumFractionDigits: 2,
-                      maximumFractionDigits: 2
-                    })}</span>
+                    <span className={styles.salary}>
+                      R$ {parseFloat(vaga.salario).toLocaleString('pt-BR', {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2
+                      })}
+                    </span>
                   </div>
                 </div>
 

@@ -54,7 +54,7 @@ export default function NovaEmpresaPage() {
             <input
               className={styles.inputField}
               name="nome"
-              placeholder="Nome *"
+              placeholder="Nome"
               value={form.nome}
               onChange={handleChange}
               required
@@ -62,7 +62,7 @@ export default function NovaEmpresaPage() {
             <input
               className={styles.inputField}
               name="cnpj"
-              placeholder="CNPJ *"
+              placeholder="CNPJ"
               value={form.cnpj}
               onChange={handleChange}
               required
@@ -91,7 +91,7 @@ export default function NovaEmpresaPage() {
             <input
               className={styles.inputField}
               name="setor"
-              placeholder="Setor *"
+              placeholder="Setor"
               value={form.setor}
               onChange={handleChange}
               required
@@ -99,7 +99,7 @@ export default function NovaEmpresaPage() {
             <input
               className={styles.inputField}
               name="localizacao"
-              placeholder="Localização *"
+              placeholder="Localização"
               value={form.localizacao}
               onChange={handleChange}
               required

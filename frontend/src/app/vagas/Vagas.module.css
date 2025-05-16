@@ -1,59 +1,133 @@
 .container {
-  padding: 3rem 2rem;
-  background: #0f0f2d; /* Fundo principal escuro uniforme */
-  color: white;
+  padding: 3rem 2rem 2rem;
   min-height: 100vh;
   box-sizing: border-box;
+  padding-top: 140px;
+  position: relative;
+  z-index: 1;
+  color: rgb(0, 0, 0);
+}
+
+.container::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 15% 20%, rgba(103, 58, 183, 0.15) 0%, transparent 25%),
+    radial-gradient(circle at 85% 70%, rgba(255, 152, 0, 0.15) 0%, transparent 30%);
+  z-index: -1;
 }
 
 .title {
-  font-size: 2.5rem;
+  font-size: 2.2rem;
   margin-bottom: 2.5rem;
   text-align: center;
-  font-weight: 700;
-  color: #ffffff;
+  font-weight: semibold;
+  color: #000000;
 }
 
 .vagaList {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2.5rem;
+  justify-content: flex-start;
 }
 
+/* CARD AJUSTADO */
 .card {
-  background-color: #1a1a32;
-  padding: 2rem;
-  border-radius: 1rem;
+  background-color: #ffffff;
+  padding: 1.8rem;
+  border-radius: 1.2rem;
+  border: 1px solid #d1d5db; /* cinza claro */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
   cursor: pointer;
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
 
 .card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
+  transform: translateY(-6px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
 }
 
-.card h2 {
-  font-size: 1.4rem;
-  margin-bottom: 0.5rem;
-  color: #ffffff;
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card h2,
+.cardTitle {
+  font-size: 1.3rem;
+  font-weight: semibold;
+  color: #111827; /* preto */
+  margin: 0;
+}
+
+.status,
+.card .status {
+  background-color: #3DF18F; /* verde exato da imagem */
+  color: rgb(0, 0, 0);
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
 }
 
 .card p {
-  font-size: 1rem;
-  margin: 0.3rem 0;
-  color: #dddddd;
+  color: #000000; /* cinza escuro */
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin: 0;
 }
 
-.card strong {
-  color: #ffb86c;
+.icon,
+.card .icon {
+  font-size: 1rem;
+  color: #6b7280; /* cinza médio */
+}
+
+.salary,
+.card .salary {
+  color: #4cbf54;
+  font-weight: 600;
+}
+
+.footer,
+.card .footer {
+  margin-top: auto;
+}
+
+.card button {
+  background: linear-gradient(90deg, #2e2e63 0%, #3a22b4 100%);
+  color: white;
+  font-weight: semibold;
+  padding: 0.6rem 1rem;
+  border: none;
+  border-radius: 0.6rem;
+  cursor: pointer;
+  margin-top: 1rem;
+  width: 100%;
+  transition: background 0.3s ease;
+}
+
+.card button:hover {
+  background: linear-gradient(90deg, #2D1C74 0%, #5D3EFF 100%);
+  filter: brightness(1.05);
 }
 
 .link {
   color: #9f7aea;
-  font-weight: bold;
+  font-weight: 600;
   display: inline-block;
   margin-top: 1.2rem;
   transition: color 0.3s;
@@ -63,9 +137,25 @@
   color: #d6bbff;
 }
 
-.loading {
+.loading,
+.loadingContainer {
   text-align: center;
   padding: 3rem;
   font-size: 1.2rem;
   color: #ccc;
+}
+
+.loader {
+  border: 4px solid #eee;
+  border-top: 4px solid #7c3aed;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 1rem;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
