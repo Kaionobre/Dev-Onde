@@ -114,9 +114,8 @@ export default function ListaVagas() {
                   </div>
                 </div>
 
-                <button className={styles.detailsButton}>
-                  Ver detalhes →
-                </button>
+                <button className={styles.detailsButton} onClick={() => window.open('https://forms.gle/Fm97oPgYQLNSNCse9', '_blank')}
+                  > Aplicar →  </button>
               </div>
             ))
           ) : (
