@@ -32,7 +32,8 @@ export default function HomePage() {
               <p>Junte-se a nós no WhatsApp</p>
             </div>
             <div className={styles.card}>
-              <img src="/imagens/forms.png" alt="Forms" />
+              <a href='https://forms.gle/Fm97oPgYQLNSNCse9' target="_blank" rel="noopener noreferrer">
+              <img src="/imagens/forms.png" alt="Forms" /></a>
               <p>Preencha o forms para concorrer a vagas</p>
             </div>
             <div className={styles.card}>

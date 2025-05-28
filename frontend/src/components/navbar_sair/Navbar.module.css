@@ -17,16 +17,17 @@
 }
 
 .logo {
+  display: flex;
+  align-items: center;
+  gap: 4px; /* espaço entre o texto e o ícone */
   font-weight: semibold;
-  font-size: 1.3rem;
-  color: #1c1c3a;
+  font-size: 1rem;
 }
-
 
 .icon {
-  color: #f9863f;
-  margin-left: 0.25rem;
+  color: orange;
 }
+
 
 .links {
   display: flex;
