@@ -12,6 +12,7 @@ interface FormData {
   tipo_contrato: string;
   vaga_ativa: boolean;
   empresa: string;
+  url_form: string;
 }
 
 export default function CriarVagaForm() {
@@ -23,6 +24,7 @@ export default function CriarVagaForm() {
     tipo_contrato: "",
     vaga_ativa: true,
     empresa: "",
+    url_form: "",
   });
 
   const [loading, setLoading] = useState(false);
@@ -158,6 +160,7 @@ export default function CriarVagaForm() {
               </label>
             </div>
 
+
             <div>
               <label className={styles.labelField}>
                 Tipo de Contrato:
@@ -177,6 +180,21 @@ export default function CriarVagaForm() {
                 </select>
               </label>
             </div>
+
+            <div>
+              <label className={styles.labelField}>
+                Formulário da vaga:
+                <input
+                  className={styles.inputField}
+                  type="text"
+                  name="url_form"
+                  value={formData.url_form}
+                  onChange={handleChange}
+                  placeholder="www.empresa/formvaga.com.br"
+                />
+              </label>
+            </div>
+
 
             <div className={styles.checkboxField}>
               <input

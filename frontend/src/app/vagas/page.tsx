@@ -15,6 +15,9 @@ interface Vaga {
   vaga_ativa: boolean;
   empresa: number;
   recrutador: number;
+  url_form: string;
+  nome_empresa: string; // 👈 novo campo para exibir no frontend
+
 }
 
 export default function ListaVagas() {
@@ -97,7 +100,7 @@ export default function ListaVagas() {
                 <div className={styles.infoGrid}>
                   <div className={styles.infoItem}>
                     <Building2 size={18} />
-                    <span>Empresa #{vaga.empresa}</span>
+                    <span>Empresa:{vaga.nome_empresa}</span>
                   </div>
                   <div className={styles.infoItem}>
                     <Briefcase size={18} />
@@ -113,9 +116,15 @@ export default function ListaVagas() {
                     </span>
                   </div>
                 </div>
-
-                <button className={styles.detailsButton} onClick={() => window.open('https://forms.gle/Fm97oPgYQLNSNCse9', '_blank')}
-                  > Aplicar →  </button>
+                <button
+                  className={styles.detailsButton}
+                  onClick={(e) => {
+                    e.stopPropagation(); // impede que o card inteiro redirecione
+                    window.open(vaga.url_form, '_blank');
+                  }}
+                >
+                  Aplicar →
+                </button>
               </div>
             ))
           ) : (
