@@ -18,6 +18,7 @@ class Vaga(models.Model):
     empresa = models.ForeignKey(Empresa, on_delete=models.CASCADE)
     recrutador = models.ForeignKey(Recrutador, on_delete=models.CASCADE)
     vaga_ativa = models.BooleanField(default=True, verbose_name="Ativa")
+    url_form = models.URLField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

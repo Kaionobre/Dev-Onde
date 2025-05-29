@@ -12,6 +12,7 @@ interface FormData {
   tipo_contrato: string;
   vaga_ativa: boolean;
   empresa: string;
+  url_form: string;
 }
 
 export default function CriarVagaForm() {
@@ -23,6 +24,7 @@ export default function CriarVagaForm() {
     tipo_contrato: "",
     vaga_ativa: true,
     empresa: "",
+    url_form: "",
   });
 
   const [loading, setLoading] = useState(false);
@@ -107,7 +109,7 @@ export default function CriarVagaForm() {
       <div className={styles.blobTopLeft}></div>
       <div className={styles.blobBottomRight}></div>
 
-      <div className={styles.registerPage}>
+      <div id="container-page-form" className={styles.registerPage}>
         <div className={styles.formContainer}>
           <h2 className={styles.formTitle}>Criar Nova Vaga</h2>
 
@@ -137,7 +139,7 @@ export default function CriarVagaForm() {
                   onChange={handleChange}
                   required
                   placeholder="Descreva os requisitos e responsabilidades da vaga"
-                  rows={5}
+                  rows={2.5}
                 />
               </label>
             </div>
@@ -158,7 +160,50 @@ export default function CriarVagaForm() {
               </label>
             </div>
 
+
             <div>
+              <label className={styles.labelField}>
+                Formulário da vaga:
+                <input
+                  className={styles.inputField}
+                  type="text"
+                  name="url_form"
+                  value={formData.url_form}
+                  onChange={handleChange}
+                  placeholder="www.empresa/formvaga.com.br"
+                />
+              </label>
+            </div>
+
+
+            <div className={styles.checkboxField}>
+              <input
+                type="checkbox"
+                name="vaga_ativa"
+                id="vaga_ativa"
+                checked={formData.vaga_ativa}
+                onChange={handleChange}
+              />
+              <label htmlFor="vaga_ativa">Vaga Ativa</label>
+            </div>
+
+          <div className={styles["wrapper-empresa-contrato"]}>
+            <div>
+              <label className={styles.labelField}>
+                Empresa (ID):
+                <input
+                  className={styles.inputField}
+                  type="text"
+                  name="empresa"
+                  value={formData.empresa}
+                  onChange={handleChange}
+                  required
+                  placeholder="Digite o ID da empresa"
+                />
+              </label>
+            </div>
+
+                        <div>
               <label className={styles.labelField}>
                 Tipo de Contrato:
                 <select
@@ -178,32 +223,8 @@ export default function CriarVagaForm() {
               </label>
             </div>
 
-            <div className={styles.checkboxField}>
-              <input
-                type="checkbox"
-                name="vaga_ativa"
-                id="vaga_ativa"
-                checked={formData.vaga_ativa}
-                onChange={handleChange}
-              />
-              <label htmlFor="vaga_ativa">Vaga Ativa</label>
-            </div>
-
-            <div>
-              <label className={styles.labelField}>
-                Empresa (ID):
-                <input
-                  className={styles.inputField}
-                  type="text"
-                  name="empresa"
-                  value={formData.empresa}
-                  onChange={handleChange}
-                  required
-                  placeholder="Digite o ID da empresa"
-                />
-              </label>
-            </div>
-
+          </div>
+           
             <button 
               className={styles.submitButton} 
               type="submit"

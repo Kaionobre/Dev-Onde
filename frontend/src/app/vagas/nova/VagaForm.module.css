@@ -1,15 +1,16 @@
 /* Layout principal da tela de registro */
 .registerPage {
+  width: 60%;
   display: flex;
-  flex-direction: row;
-  min-height: 100vh;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  padding: 2rem 3rem;
-  gap: 3rem;
-  background: white;
+  justify-content: flex-start;
+  padding: 2rem 2rem;
+  background: rgba(255, 255, 255, 0);
   position: relative;
-  padding-top: 150px;
+  padding-top: 60px;
+  min-height: 100vh;
+  gap: 2rem;
 }
 
 /* Navbar fixa no topo */
@@ -138,10 +139,10 @@
 /* Container do formulário */
 .formContainer {
   width: 100%;
-  max-width: 700px;
+  max-width: 900px;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1rem;
   padding: 2rem;
   border-radius: 16px;
   background: rgba(255, 255, 255, 0.6);
@@ -150,7 +151,7 @@
   backdrop-filter: blur(10px);
   position: relative;
   z-index: 2;
-  margin: 5rem auto 0 auto;
+  margin: 3rem auto 0 auto;
 }
 
 /* Título com destaque */
@@ -183,7 +184,7 @@
   font-size: 1rem;
   background-color: #fff;
   width: 100%;
-  margin-bottom: 0.8rem;
+  margin-bottom: 0.3rem;
   box-sizing: border-box;
 }
 
@@ -214,6 +215,18 @@
   box-shadow: 0 6px 20px rgba(46, 46, 99, 0.3);
 }
 
+/* Checkbox customizado */
+.checkboxField {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0.5rem 0;
+  font-size: 0.95rem;
+  color: #1c1c3a;
+}
+
+
+
 /* Animação */
 @keyframes fadeIn {
   from {
@@ -226,20 +239,47 @@
   }
 }
 
+/* Alertas de sucesso e erro */
+.alert {
+  max-width: 900px;
+  margin: 1rem auto;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  font-weight: 500;
+  text-align: center;
+  font-size: 1rem;
+}
+
+.alert.success {
+  background-color: #dff0d8;
+  color: #3c763d;
+  border: 1px solid #c1e2b3;
+}
+
+.alert.error {
+  background-color: #f2dede;
+  color: #a94442;
+  border: 1px solid #ebccd1;
+}
+.wrapper-empresa-contrato{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
 /* Responsividade */
 @media (max-width: 1024px) {
   .registerPage {
-    flex-direction: column;
     padding: 2rem;
-    gap: 2rem;
-  }
-
-  .imageSection {
-    display: none;
   }
 
   .formContainer {
     max-width: 100%;
+    padding: 1.5rem;
+  }
+
+  .imageSection {
+    display: none;
   }
 
   .blobTopLeft,
@@ -258,4 +298,3 @@
     padding: 1.5rem;
   }
 }
-
