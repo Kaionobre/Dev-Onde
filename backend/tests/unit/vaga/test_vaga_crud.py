@@ -69,7 +69,8 @@ def test_criar_vaga_com_recrutador_autenticado(client, auth_headers_recrutador, 
         "tipo_contrato": "CLT",
         "empresa": empresa,
         "requisitos": "Python, Django, REST API",
-        "local_trabalho": "Remoto"
+        "local_trabalho": "Remoto",
+        "url_form": "https://form.example.com/candidatar"
     }
 
     response = client.post(
@@ -83,7 +84,6 @@ def test_criar_vaga_com_recrutador_autenticado(client, auth_headers_recrutador, 
     data = response.json()
     assert data["titulo"] == dados["titulo"]
     assert data["descricao"] == dados["descricao"]
-    # Convertendo a string para float para comparação correta
     assert float(data["salario"]) == dados["salario"]
     assert data["tipo_contrato"] == dados["tipo_contrato"]
     assert "recrutador" in data
@@ -91,7 +91,6 @@ def test_criar_vaga_com_recrutador_autenticado(client, auth_headers_recrutador, 
 
 @pytest.mark.django_db
 def test_listar_vagas(client, auth_headers_recrutador, empresa):
-    # Primeiro criamos uma vaga
     dados_vaga = {
         "titulo": "Desenvolvedor Django",
         "descricao": "Vaga para desenvolvedor Django com experiência em REST.",
@@ -99,7 +98,8 @@ def test_listar_vagas(client, auth_headers_recrutador, empresa):
         "tipo_contrato": "CLT",
         "empresa": empresa,
         "requisitos": "Django, DRF, PostgreSQL",
-        "local_trabalho": "Remoto"
+        "local_trabalho": "Remoto",
+        "url_form": "https://form.example.com/candidatar"
     }
     
     response = client.post(
@@ -111,7 +111,6 @@ def test_listar_vagas(client, auth_headers_recrutador, empresa):
     
     assert response.status_code == 201
     
-    # Agora testamos a listagem
     response = client.get("/api/vagas/", **auth_headers_recrutador)
     
     assert response.status_code == 200
@@ -121,7 +120,6 @@ def test_listar_vagas(client, auth_headers_recrutador, empresa):
 
 @pytest.mark.django_db
 def test_editar_vaga(client, auth_headers_recrutador, empresa):
-    # Criar uma vaga primeiro
     dados_vaga = {
         "titulo": "Dev Backend",
         "descricao": "Vaga para desenvolvedor backend.",
@@ -129,7 +127,8 @@ def test_editar_vaga(client, auth_headers_recrutador, empresa):
         "tipo_contrato": "CLT",
         "empresa": empresa,
         "requisitos": "Python, FastAPI",
-        "local_trabalho": "Híbrido"
+        "local_trabalho": "Híbrido",
+        "url_form": "https://form.example.com/candidatar"
     }
     
     response = client.post(
@@ -142,7 +141,6 @@ def test_editar_vaga(client, auth_headers_recrutador, empresa):
     assert response.status_code == 201
     vaga_id = response.json()["id"]
     
-    # Atualizar a vaga
     dados_atualizados = {
         "titulo": "Dev Backend Senior",
         "salario": 10000.00
@@ -158,14 +156,11 @@ def test_editar_vaga(client, auth_headers_recrutador, empresa):
     assert response.status_code == 200
     data = response.json()
     assert data["titulo"] == dados_atualizados["titulo"]
-    # Convertendo a string para float para comparação correta
     assert float(data["salario"]) == dados_atualizados["salario"]
-    # Os campos não atualizados devem permanecer os mesmos
     assert data["descricao"] == dados_vaga["descricao"]
 
 @pytest.mark.django_db
 def test_deletar_vaga(client, auth_headers_recrutador, empresa):
-    # Criar uma vaga primeiro
     dados_vaga = {
         "titulo": "Vaga para deletar",
         "descricao": "Esta vaga será deletada",
@@ -173,7 +168,8 @@ def test_deletar_vaga(client, auth_headers_recrutador, empresa):
         "tipo_contrato": "PJ",
         "empresa": empresa,
         "requisitos": "JavaScript, React",
-        "local_trabalho": "Presencial"
+        "local_trabalho": "Presencial",
+        "url_form": "https://form.example.com/candidatar"
     }
     
     response = client.post(
@@ -186,7 +182,6 @@ def test_deletar_vaga(client, auth_headers_recrutador, empresa):
     assert response.status_code == 201
     vaga_id = response.json()["id"]
     
-    # Deletar a vaga
     response = client.delete(
         f"/api/vagas/{vaga_id}/",
         **auth_headers_recrutador
@@ -194,7 +189,6 @@ def test_deletar_vaga(client, auth_headers_recrutador, empresa):
     
     assert response.status_code == 204
     
-    # Verificar que a vaga foi realmente excluída
     response = client.get(
         f"/api/vagas/{vaga_id}/",
         **auth_headers_recrutador

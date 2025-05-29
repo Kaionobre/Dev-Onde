@@ -33,30 +33,33 @@ class TestLogDividido(unittest.TestCase):
         button_login.click()
 
         time.sleep(5)
-
         self.browser.get('http://localhost:3000/vagas/nova')
 
         titulo_vaga = self.browser.find_element(By.XPATH, '/html/body/div[4]/div/form/div[1]/label/input')
         titulo_vaga.send_keys('Dev RPA')
     
-        descricao_vaga = self.browser.find_element(By.XPATH, '/html/body/div[4]/div/form/div[2]/label/textarea')
+        descricao_vaga = self.browser.find_element(By.XPATH, '//*[@id="container-page-form"]/div/form/div[2]/label/textarea')
         descricao_vaga.send_keys('Procuramos um Dev RPA Python 3a de EXP')
 
-        salario_vaga = self.browser.find_element(By.XPATH, '/html/body/div[4]/div/form/div[3]/label/input')
+        salario_vaga = self.browser.find_element(By.XPATH, '//*[@id="container-page-form"]/div/form/div[3]/label/input')
         salario_vaga.send_keys('3000')
 
-        tipo_contrato_vaga = self.browser.find_element(By.XPATH, '/html/body/div[4]/div/form/div[4]/label/select')
-        tipo_contrato_vaga.click()
-
-        selecionar_tipo_contrato_CLT = self.browser.find_element(By.XPATH, '/html/body/div[4]/div/form/div[4]/label/select')
-        selecionar_tipo_contrato_CLT.click()
+        formulario_vaga = self.browser.find_element(By.XPATH, '//*[@id="container-page-form"]/div/form/div[4]/label/input')
+        formulario_vaga.send_keys('https://docs.google.com/forms/d/e/1FAIpQLSeO704k6WKeQOcC6Cer-IOfeJw1Xl3jcm5skeNdvUkPVGl3og/viewform?usp=send_form')
 
         imput_vaga_ativa = self.browser.find_element(By.XPATH, '//*[@id="vaga_ativa"]')
         imput_vaga_ativa.click()
+        
+        tipo_contrato_vaga = self.browser.find_element(By.XPATH, '//*[@id="container-page-form"]/div/form/div[6]/div[2]/label/select')
+        tipo_contrato_vaga.click()
 
-        id_empresa = self.browser.find_element(By.XPATH, '/html/body/div[4]/div/form/div[6]/label/input')
-        id_empresa.click()
-       
+        selecionar_tipo_contrato_CLT = self.browser.find_element(By.XPATH, '//*[@id="container-page-form"]/div/form/div[6]/div[2]/label/select/option[2]')
+        selecionar_tipo_contrato_CLT.click()
 
-        time.sleep(4)
+        id_empresa = self.browser.find_element(By.XPATH, '//*[@id="container-page-form"]/div/form/div[6]/div[1]/label/input')
+        id_empresa.send_keys('1')
+
+        button_criar_vaga = self.browser.find_element(By.XPATH, '//*[@id="container-page-form"]/div/form/button')
+        button_criar_vaga.click()
+
         self.assertIn('/vagas', self.browser.current_url)
